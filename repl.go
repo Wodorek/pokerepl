@@ -5,7 +5,15 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/wodorek/pokerepl/internal/pokeapi"
 )
+
+type config struct {
+	pokeapiClient     pokeapi.Client
+	nextLocationsPage *string
+	prevLocationsPage *string
+}
 
 func cleanInput(text string) []string {
 	output := strings.ToLower(text)
@@ -13,7 +21,7 @@ func cleanInput(text string) []string {
 	return words
 }
 
-func startRepl() {
+func startRepl(cfg *config) {
 	reader := bufio.NewScanner(os.Stdin)
 
 	for {
@@ -35,7 +43,7 @@ func startRepl() {
 			continue
 		}
 
-		err := cmd.callback()
+		err := cmd.callback(cfg)
 
 		if err != nil {
 			fmt.Println(err)
@@ -47,7 +55,7 @@ func startRepl() {
 type cliCommand struct {
 	name        string
 	description string
-	callback    func() error
+	callback    func(cfg *config) error
 }
 
 func getCommands() map[string]cliCommand {
@@ -61,6 +69,16 @@ func getCommands() map[string]cliCommand {
 			name:        "exit",
 			description: "closes the cli",
 			callback:    commandExit,
+		},
+		"map": {
+			name:        "map",
+			description: "Get the next page of locations",
+			callback:    commandMapf,
+		},
+		"mapb": {
+			name:        "mapb",
+			description: "Get the previous page of locations",
+			callback:    commandMapb,
 		},
 	}
 }
