@@ -1,6 +1,6 @@
 package pokeapi
 
-type RespShallowLocation struct {
+type RespShallowLocations struct {
 	Count   int     `json:"count"`
 	Next    *string `json:"next"`
 	Prev    *string `json:"previous"`
