@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func commandMapf(cfg *config) error {
+func commandMapf(cfg *config, args ...string) error {
 	client := cfg.pokeapiClient
 
 	locations, err := client.ListLocations(cfg.nextLocationsPage)
@@ -25,7 +25,7 @@ func commandMapf(cfg *config) error {
 
 }
 
-func commandMapb(cfg *config) error {
+func commandMapb(cfg *config, args ...string) error {
 	client := cfg.pokeapiClient
 
 	if cfg.prevLocationsPage == nil {
