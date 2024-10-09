@@ -20,8 +20,3 @@ func NewClient(timeout time.Duration, reapInterval time.Duration) Client {
 		},
 	}
 }
-
-// debug method, to be deleted
-func (c *Client) PrintCache() {
-	c.cache.PrintCache()
-}

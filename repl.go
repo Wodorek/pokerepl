@@ -80,11 +80,5 @@ func getCommands() map[string]cliCommand {
 			description: "Get the previous page of locations",
 			callback:    commandMapb,
 		},
-		//debug metod, to be deleted
-		"showcache": {
-			name:        "showcache",
-			description: "shows items in cache",
-			callback:    commandPrintCache,
-		},
 	}
 }
