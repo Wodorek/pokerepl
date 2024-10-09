@@ -43,5 +43,7 @@ func (c *Client) LocationExplore(locationName string) (Location, error) {
 		return Location{}, err
 	}
 
+	c.cache.Add(fullUrl, data)
+
 	return location, nil
 }
